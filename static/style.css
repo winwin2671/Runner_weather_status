@@ -1,3 +1,23 @@
 body {
   background-color: skyblue;
 }
+
+p {
+  color: white;
+  font-size: 3rem;
+}
+
+svg {
+  font-size: 3rem;
+}
+
+input {
+  height: 2rem;
+}
+
+.container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50vh;
+}
