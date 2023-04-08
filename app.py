@@ -40,3 +40,6 @@ def running_suitability():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# updated to a flask file and only use iqair api
