@@ -23,7 +23,9 @@ def running_suitability():
     temperature = data["data"]["current"]["weather"]["tp"]
     humidity = data["data"]["current"]["weather"]["hu"]
     no2 = data["data"]["current"]["pollution"]["no2"]["conc"]
+    uv_index = data["data"]["current"]["weather"]["uv"]
 
+# info check needed
     if temperature >= 55 and temperature <= 65:
         if humidity <= 70:
             if no2 <= 50:
@@ -35,7 +37,7 @@ def running_suitability():
     else:
         message = "Temperature may not be suitable for running."
 
-    return render_template("running_suitability.html", location=location, date=date, message=message)
+    return render_template("index.html", location=location, date=date, message=message)
 
 
 if __name__ == "__main__":
