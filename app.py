@@ -22,16 +22,16 @@ def running_suitability():
     # Get weather and air quality data from the API response
     temperature = data["data"]["current"]["weather"]["tp"]
     humidity = data["data"]["current"]["weather"]["hu"]
-    no2 = data["data"]["current"]["pollution"]["no2"]["conc"]
+    pm25 = data["data"]["current"]["pollution"]["pm2_5"]["conc"]
     uv_index = data["data"]["current"]["weather"]["uv"]
 
 # info check needed
-    if temperature >= 55 and temperature <= 65:
+    if temperature >= 12.8 and temperature <= 25:
         if humidity <= 70:
-            if no2 <= 50:
-                message = "It's a great day for running!"
+            if pm25 <= 25:
+                message = f"It's a great day for running! The PM2.5 level is {pm25} µg/m³."
             else:
-                message = "Air quality may not be suitable for running."
+                message = f"Air quality may not be suitable for running. The PM2.5 level is {pm25} µg/m³."
         else:
             message = "Humidity may make it difficult to run."
     else:
@@ -42,6 +42,3 @@ def running_suitability():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-# updated to a flask file and only use iqair api
