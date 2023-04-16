@@ -10,17 +10,17 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/running-suitability", methods=["POST"])
+@app.route("/index", methods=["POST"])
 def running_suitability():
     location = request.form.get("location")
     date = request.form.get("date")
 
-    url = f"https://api.airvisual.com/v2/nearest_city?key={api_key}"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
     response = requests.get(url)
     data = response.json()
 
     # Get weather and air quality data from the API response
-    temperature = data["data"]["current"]["weather"]["tp"]
+    temperature = round(data["main"]["temp"] - 273.15, 1)
     humidity = data["data"]["current"]["weather"]["hu"]
     pm25 = data["data"]["current"]["pollution"]["pm2_5"]["conc"]
     uv_index = data["data"]["current"]["weather"]["uv"]
@@ -31,7 +31,7 @@ def running_suitability():
         if uv_index <= 5:
             if humidity <= 70:
                 if pm25 <= 25:
-                    message = f"It's a great day for running!"
+                    message = "It's a great day for running!"
                 else:
                     message = f"Air quality may not be suitable for running. The PM2.5 level is {pm25} µg/m³."
             else:
