@@ -1,6 +1,6 @@
 import requests
 from flask import Flask, render_template, request
-import config
+from config import api_key
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def running_suitability():
     location = request.form.get("location")
     date = request.form.get("date")
 
-    url = f"https://api.airvisual.com/v2/nearest_city?key={config.api_key}"
+    url = f"https://api.airvisual.com/v2/nearest_city?key={api_key}"
     response = requests.get(url)
     data = response.json()
 
