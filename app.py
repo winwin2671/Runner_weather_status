@@ -1,5 +1,6 @@
 import requests
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 from config import api_key
 
 app = Flask(__name__)
@@ -12,15 +13,17 @@ def index():
 
 @app.route("/index", methods=["POST"])
 def running_suitability():
-    location = request.form.get("location")
+    city = 'London'  # request.form.get("city")
     date = request.form.get("date")
-
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
+    units = 'metric'  # request.form.get("units")
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
     response = requests.get(url)
     data = response.json()
+    print(data)
 
     # Get weather and air quality data from the API response
-    temperature = round(data["main"]["temp"] - 273.15, 1)
+    # have to check the api agian!
+    temperature = data["main"]["temp"]
     humidity = data["data"]["current"]["weather"]["hu"]
     pm25 = data["data"]["current"]["pollution"]["pm2_5"]["conc"]
     uv_index = data["data"]["current"]["weather"]["uv"]
@@ -41,7 +44,7 @@ def running_suitability():
     else:
         message = "Temperature may not be suitable for running."
 
-    return render_template("index.html", location=location, date=date, message=message)
+    return render_template("index.html", city=city, date=date, message=message)
 
 
 if __name__ == "__main__":
