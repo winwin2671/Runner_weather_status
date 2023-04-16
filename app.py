@@ -31,7 +31,7 @@ def running_suitability():
         if uv_index <= 5:
             if humidity <= 70:
                 if pm25 <= 25:
-                    message = f"It's a great day for running! The PM2.5 level is {pm25} µg/m³."
+                    message = f"It's a great day for running!"
                 else:
                     message = f"Air quality may not be suitable for running. The PM2.5 level is {pm25} µg/m³."
             else:
