@@ -14,9 +14,8 @@ def index():
 def running_suitability():
     location = request.form.get("location")
     date = request.form.get("date")
-    api_key = "<YOUR_IQAIR_API_KEY>"
 
-    url = f"https://api.airvisual.com/v2/nearest_city?key={api_key}"
+    url = f"https://api.airvisual.com/v2/nearest_city?key={config.api_key}"
     response = requests.get(url)
     data = response.json()
 
