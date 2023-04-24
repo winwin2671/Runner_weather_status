@@ -10,6 +10,8 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+# The function not have been called at all!
+
 
 @app.route("/index", methods=["POST"])
 def running_suitability():
