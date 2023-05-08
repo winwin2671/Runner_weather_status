@@ -8,6 +8,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # this is a test run
+    city = 'London'  # request.form.get("city")
+    date = request.form.get("date")
+    units = 'metric'  # request.form.get("units")
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
+    response = requests.get(url)
+    data = response.json()
+    print(data)
     return render_template("index.html")
 
 # The function not have been called at all!
