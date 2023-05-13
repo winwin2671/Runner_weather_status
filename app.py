@@ -1,3 +1,4 @@
+import json
 import requests
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
@@ -8,53 +9,45 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    # this is a test run
-    city = 'London'  # request.form.get("city")
-    date = request.form.get("date")
+    city = 'Bangkok' # request.form.get("city")
     units = 'metric'  # request.form.get("units")
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
-    response = requests.get(url)
-    data = response.json()
-    print(data)
-    return render_template("index.html")
+    lat = 13.75  #will make it convert later
+    lon = 100.5167 #will make it convert later
+    weather_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
+    air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
+ 
+    weather_response = requests.get(weather_url)
+    air_response = requests.get(air_url)
 
-# The function not have been called at all!
+    data = weather_response.json()
+    data_air = air_response.json()
 
+    print(json.dumps(data, indent=4))
+    print(json.dumps(data_air, indent=4))
 
-@app.route("/index", methods=["POST"])
-def running_suitability():
-    city = 'London'  # request.form.get("city")
-    date = request.form.get("date")
-    units = 'metric'  # request.form.get("units")
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
-    response = requests.get(url)
-    data = response.json()
-    print(data)
-
-    # Get weather and air quality data from the API response
-    # have to check the api agian!
     temperature = data["main"]["temp"]
-    humidity = data["data"]["current"]["weather"]["hu"]
-    pm25 = data["data"]["current"]["pollution"]["pm2_5"]["conc"]
-    uv_index = data["data"]["current"]["weather"]["uv"]
-    precipitation = data["data"]["current"]["weather"]["precipitation"]
+    humidity = data["main"]["humidity"]
+    aqi = data_air["list"][0]["main"]["aqi"]
+    #uv_index = data["list"][0]["components"]["uvi"] #openweather Deprecated it for the free version
+    #precipitation = data["list"][0]["components"]["precipitation"] 
 
-# info check needed
     if temperature >= 12.8 and temperature <= 25:
-        if uv_index <= 5:
+        #if uv_index <= 5:
             if humidity <= 70:
-                if pm25 <= 25:
+                if aqi <= 25:
                     message = "It's a great day for running!"
                 else:
-                    message = f"Air quality may not be suitable for running. The PM2.5 level is {pm25} µg/m³."
+                    message = f"Air quality may not be suitable for running. The AQI level is {aqi}"
             else:
                 message = "Humidity may make it difficult to run."
-        else:
-            message = f"UV_index may not be suitable for running: {uv_index} "
+        #else:
+            #message = f"UV index may not be suitable for running: {uv_index}"
     else:
-        message = "Temperature may not be suitable for running."
+        message = f"Temperature may make it difficult to run: {temperature}°"
 
-    return render_template("index.html", city=city, date=date, message=message)
+    print(message)
+
+    return render_template("index.html", message=message)
 
 
 if __name__ == "__main__":
