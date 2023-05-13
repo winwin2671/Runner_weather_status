@@ -27,23 +27,20 @@ def index():
 
     temperature = data["main"]["temp"]
     humidity = data["main"]["humidity"]
+    feels_like = data["main"]["feels_like"]
     aqi = data_air["list"][0]["main"]["aqi"]
     #uv_index = data["list"][0]["components"]["uvi"] #openweather Deprecated it for the free version
     #precipitation = data["list"][0]["components"]["precipitation"] 
 
-    if temperature >= 12.8 and temperature <= 25:
-        #if uv_index <= 5:
-            if humidity <= 70:
-                if aqi <= 25:
-                    message = "It's a great day for running!"
-                else:
-                    message = f"Air quality may not be suitable for running. The AQI level is {aqi}"
-            else:
-                message = "Humidity may make it difficult to run."
-        #else:
-            #message = f"UV index may not be suitable for running: {uv_index}"
-    else:
+    if temperature >= 35 and temperature <= -27:
         message = f"Temperature may make it difficult to run: {temperature}°"
+    elif humidity <= 70:
+        message = f"Humidity may make it difficult to run as it feels like {feels_like}°"
+    elif aqi >= 4:
+           message = f"Air quality may not be suitable for running. The AQI level is {aqi}"
+    else:
+        message = "It's a great day for running. Enjoy!"
+      
 
     print(message)
 
