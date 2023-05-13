@@ -1,7 +1,7 @@
 import json
 import requests
 from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy #for user selecting countries 
 from config import api_key
 
 app = Flask(__name__)
