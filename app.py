@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    city = 'Bangkok' # request.form.get("city")
+    city = 'Bang Kapi' # request.form.get("city") 
     units = 'metric'  # request.form.get("units")
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
@@ -17,7 +17,7 @@ def index():
     lat =  data_loc[0]["lat"]
     lon = data_loc[0]["lon"]
     
-    weather_url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
+    weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
 
     weather_response = requests.get(weather_url)
@@ -26,16 +26,20 @@ def index():
     data = weather_response.json()
     data_air = air_response.json()
 
+
     print(json.dumps(data, indent=4))
     print(json.dumps(data_air, indent=4))
     
+    if "rain" in data:
+        rain = True
+    else:
+        rain = False
 
     temperature = data["main"]["temp"]
     humidity = data["main"]["humidity"]
     feels_like = data["main"]["feels_like"]
     aqi = data_air["list"][0]["main"]["aqi"]
-    #uv_index = data["list"][0]["components"]["uvi"] #openweather Deprecated it for the free version
-    #precipitation = data["list"][0]["components"]["precipitation"] 
+    #uv_index openweather Deprecated it for the free version 
    
     if aqi == 1:
         aqi_stat = 'Good'
@@ -47,19 +51,28 @@ def index():
         aqi_stat = 'Poor'
     else:
         aqi_stat = 'Very Poor'
+    
+    
+    messages = []
 
+    if temperature >= 35 or temperature <= -27:
+        messages.append(f"Temperature may make it difficult to run: {temperature}°")
 
-    if temperature >= 35 and temperature <= -27:
-        message = f"Temperature may make it difficult to run: {temperature}°"
-    elif humidity <= 70: 
-        message = f"Humidity may make it difficult to run as it feels like {feels_like}°"
-    elif aqi >= 4:
-           message = f"Air quality may not be suitable for running. The AQI level is {aqi}, {aqi_stat}"
-    else:
-        message = "It's a great day for running. Enjoy!"
-      
+    if aqi >= 4:
+        messages.append(f"Air quality may not be suitable for running. The AQI level is {aqi}, {aqi_stat}")
 
-    print(message)
+    if rain:
+        messages.append("It is raining, be mindful of your running session")
+
+    if humidity > 70 and (feels_like >= 35 or feels_like <= -27) :
+        messages.append(f"Humidity may make it difficult to run as it feels like {feels_like}°")
+
+    if temperature < 35 and temperature > -27 and aqi < 4 and humidity <= 70 and not rain:
+        messages.append("It's a great day for running. Enjoy!")
+
+    for message in messages:
+        print(message)
+        
     return render_template("index.html", message=message)
 
 
