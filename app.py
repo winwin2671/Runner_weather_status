@@ -1,7 +1,7 @@
 import requests
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from config import api_key
+#from config import api_key
 
 app = Flask(__name__)
 

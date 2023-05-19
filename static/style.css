@@ -1,23 +1,40 @@
-body {
-  background-color: skyblue;
+body
+{
+  background-color: lightgrey;
+  margin: 0;
 }
 
-p {
-  color: white;
-  font-size: 3rem;
+div
+{
+  display: inline-block;
 }
 
-svg {
-  font-size: 3rem;
+.container
+{
+  position: absolute;
+  background-color: rgb(92, 91, 91);
+  border-radius: 25px;
+  height: 75vh;
+  width: 75vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
 }
 
-input {
-  height: 2rem;
-}
-
-.container {
+.top-nav
+{
+  padding: 2%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50vh;
 }
+
+.place
+{
+  float: left;
+}
+
+.settings
+{
+  float: right;
+}
+
