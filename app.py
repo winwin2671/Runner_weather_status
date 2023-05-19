@@ -1,52 +1,79 @@
+import json
 import requests
 from flask import Flask, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-#from config import api_key
+from flask_sqlalchemy import SQLAlchemy #for user selecting countries 
+from config import api_key
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-
-# The function not have been called at all!
-
-
-@app.route("/index", methods=["POST"])
-def running_suitability():
-    city = 'London'  # request.form.get("city")
-    date = request.form.get("date")
+    city = 'Bang Kapi' # request.form.get("city") 
     units = 'metric'  # request.form.get("units")
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units={units}"
-    response = requests.get(url)
-    data = response.json()
-    print(data)
+    location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
+    location_response = requests.get(location_url)
+    data_loc = location_response.json()
+    lat =  data_loc[0]["lat"]
+    lon = data_loc[0]["lon"]
+    
+    weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
+    air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
 
-    # Get weather and air quality data from the API response
-    # have to check the api agian!
-    temperature = data["main"]["temp"]
-    humidity = data["data"]["current"]["weather"]["hu"]
-    pm25 = data["data"]["current"]["pollution"]["pm2_5"]["conc"]
-    uv_index = data["data"]["current"]["weather"]["uv"]
-    precipitation = data["data"]["current"]["weather"]["precipitation"]
+    weather_response = requests.get(weather_url)
+    air_response = requests.get(air_url)
 
-# info check needed
-    if temperature >= 12.8 and temperature <= 25:
-        if uv_index <= 5:
-            if humidity <= 70:
-                if pm25 <= 25:
-                    message = "It's a great day for running!"
-                else:
-                    message = f"Air quality may not be suitable for running. The PM2.5 level is {pm25} µg/m³."
-            else:
-                message = "Humidity may make it difficult to run."
-        else:
-            message = f"UV_index may not be suitable for running: {uv_index} "
+    data = weather_response.json()
+    data_air = air_response.json()
+
+
+    print(json.dumps(data, indent=4))
+    print(json.dumps(data_air, indent=4))
+    
+    if "rain" in data:
+        rain = True
     else:
-        message = "Temperature may not be suitable for running."
+        rain = False
 
-    return render_template("index.html", city=city, date=date, message=message)
+    temperature = data["main"]["temp"]
+    humidity = data["main"]["humidity"]
+    feels_like = data["main"]["feels_like"]
+    aqi = data_air["list"][0]["main"]["aqi"]
+    #uv_index openweather Deprecated it for the free version 
+   
+    if aqi == 1:
+        aqi_stat = 'Good'
+    elif aqi == 2:
+        aqi_stat = 'Fair'
+    elif aqi == 3:
+        aqi_stat= 'Moderate'
+    elif aqi == 4:
+        aqi_stat = 'Poor'
+    else:
+        aqi_stat = 'Very Poor'
+    
+    
+    messages = []
+
+    if temperature >= 35 or temperature <= -27:
+        messages.append(f"Temperature may make it difficult to run: {temperature}°")
+
+    if aqi >= 4:
+        messages.append(f"Air quality may not be suitable for running. The AQI level is {aqi}, {aqi_stat}")
+
+    if rain:
+        messages.append("It is raining, be mindful of your running session")
+
+    if humidity > 70 and (feels_like >= 35 or feels_like <= -27) :
+        messages.append(f"Humidity may make it difficult to run as it feels like {feels_like}°")
+
+    if temperature < 35 and temperature > -27 and aqi < 4 and humidity <= 70 and not rain:
+        messages.append("It's a great day for running. Enjoy!")
+
+    for message in messages:
+        print(message)
+        
+    return render_template("index.html", message=message)
 
 
 if __name__ == "__main__":
