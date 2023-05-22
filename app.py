@@ -1,21 +1,12 @@
 import json
 import requests
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request
 from config import api_key
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///weather.db'
-
-db = SQLAlchemy(app)
-
-class city(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-
 @app.route("/")
-def index():
-    city = 'los angeles'
+def index_get():
+    city = 'Bang Kapi'
     units = 'metric'
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
@@ -25,12 +16,17 @@ def index():
 
     weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
+    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/100/200.png?appid={api_key}"
 
     weather_response = requests.get(weather_url)
     air_response = requests.get(air_url)
+    map_response = requests.get(map_url)
 
     data = weather_response.json()
     data_air = air_response.json()
+    data_map = map_response.content
+
+    image_data = data_map
 
     print(json.dumps(data, indent=4))
     print(json.dumps(data_air, indent=4))
@@ -39,6 +35,15 @@ def index():
         rain = True
     else:
         rain = False
+    
+    weather = {
+    'temperature': data["main"]["temp"],
+    'humidity': data["main"]["humidity"],
+    'feels_like' : data["main"]["feels_like"],
+    'aqi' : data_air["list"][0]["main"]["aqi"],
+    'icon': data['weather'][0]['icon'],
+    }
+
 
     temperature = data["main"]["temp"]
     humidity = data["main"]["humidity"]
@@ -70,6 +75,9 @@ def index():
     if humidity > 70 and (feels_like >= 35 or feels_like <= -27):
         messages.append(f"Humidity may make it difficult to run as it feels like {feels_like}°")
 
+    if feels_like >= 35 or feels_like <= -27:
+        messages.append(f"It feels like {feels_like}°, may make it difficult to run")
+
     if not messages:
         messages.append("It's a great day for running. Enjoy!")
 
@@ -77,7 +85,15 @@ def index():
     for message in messages:
         print(message)
 
-    return render_template("index.html", messages=messages)
+    return render_template("index.html", messages=messages, image_data=image_data, weather=weather)
+
+
+#check city name vaild 
+#@app.route('/', methods=['POST'])
+#def index_post():
+
+    #return 
+
 
 if __name__ == "__main__":
     app.run(debug=True)
