@@ -1,1 +1,1 @@
-# Running_weather_status/CS50x Final project
+# Runner_weather_status/CS50x Final project
