@@ -10,6 +10,10 @@ The key factors considered when assessing the weather status:
   - Air Quality Index (AQI)
   - precipitation
   
+  ## User Benefits:
+  By utilizing this web app, runners can greatly benefit in terms of their personal health during their running sessions. The app provides valuable climate data that is tailored to the specific effects it has on the runner's well-being. With this data, runners can plan and adjust their training accordingly based on the weather conditions to minimize injuries and potential health risks.
+  
+  
   ## Tech used:
   - Python (Flask)
   - HTML
