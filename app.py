@@ -6,7 +6,7 @@ from config import api_key
 app = Flask(__name__)
 @app.route("/")
 def index_get():
-    city = 'Bang Kapi'
+    city = 'Bang Kapi' 
     units = 'metric'
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
@@ -16,7 +16,7 @@ def index_get():
 
     weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/100/200.png?appid={api_key}"
+    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/100/200.png?appid={api_key}"   
 
     weather_response = requests.get(weather_url)
     air_response = requests.get(air_url)
@@ -37,11 +37,12 @@ def index_get():
         rain = False
     
     weather = {
-    'temperature': data["main"]["temp"],
-    'humidity': data["main"]["humidity"],
-    'feels_like' : data["main"]["feels_like"],
-    'aqi' : data_air["list"][0]["main"]["aqi"],
-    'icon': data['weather'][0]['icon'],
+        'city': city,
+        'temperature': data["main"]["temp"],
+        'humidity': data["main"]["humidity"],
+        'feels_like' : data["main"]["feels_like"],
+        'aqi' : data_air["list"][0]["main"]["aqi"],
+        'icon': data['weather'][0]['icon'],
     }
 
 
