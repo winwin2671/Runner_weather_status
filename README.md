@@ -16,11 +16,11 @@ The key factors considered when assessing the weather status:
   - CSS
   - Openweathermap API
   
-  ## How to Install and Run the Project:
-  todo
+# How to Install and Run the Project:
+ todo
   
-  ## How to Use the Project:
-  todo
+# How to Use the Project:
+ todo
   
 # Future Features:
   todo
