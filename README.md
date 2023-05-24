@@ -26,4 +26,6 @@ The key factors considered when assessing the weather status:
   todo
   
 # Acknowledgements:
- todo
+- [Impact of Weather on Marathon-Running Performance](https://journals.lww.com/acsm-msse/Fulltext/2007/03000/Impact_of_Weather_on_Marathon_Running_Performance.12.aspx)
+- [Here's How Weather Conditions Affect Your Running Speed](https://www.outsideonline.com/health/training-performance/weather-running-performance-research/)
+- [what hot temperatures can do to your running and how to cope](https://www.runnersworld.com/uk/training/a775069/what-hot-temperatures-can-do-to-your-running-and-how-to-cope/#)
