@@ -4,15 +4,31 @@ from flask import Flask, render_template, request
 from config import api_key
 
 app = Flask(__name__)
+
+def check_city_existence(city):
+    location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
+    location_response = requests.get(location_url)
+    data_loc = location_response.json()
+    if data_loc:
+        return True
+    else:
+        return False
+
 @app.route("/")
 def index_get():
-    city = 'Bang Kapi' 
+    city = 'London'
     units = 'metric'
+    
+    if not check_city_existence(city):
+        print("City not found.")
+        #return render_template("error.html", message="City not found.")
+    
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
     data_loc = location_response.json()
     lat = data_loc[0]["lat"]
     lon = data_loc[0]["lon"]
+
 
     weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
@@ -87,14 +103,6 @@ def index_get():
         print(message)
 
     return render_template("index.html", messages=messages, image_data=image_data, weather=weather)
-
-
-#check city name vaild 
-#@app.route('/', methods=['POST'])
-#def index_post():
-
-    #return 
-
 
 if __name__ == "__main__":
     app.run(debug=True)
