@@ -28,7 +28,7 @@ The key factors considered when assessing the weather status:
  will do it by adding requirements.txt file
   
 # Future Features:
-  - Get user's location automatically by using Geolocation API JavaScript 
+  - Get user's location automatically by using Geolocation API 
   
 # Acknowledgements:
 - [Impact of Weather on Marathon-Running Performance](https://journals.lww.com/acsm-msse/Fulltext/2007/03000/Impact_of_Weather_on_Marathon_Running_Performance.12.aspx)
