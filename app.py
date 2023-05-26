@@ -16,7 +16,7 @@ def check_city_existence(city):
 
 @app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'Londony'
+    city = 'London' #try type random word to see the erorr page
     units = 'metric'
     
     if not check_city_existence(city):
