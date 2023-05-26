@@ -4,19 +4,36 @@ from flask import Flask, render_template, request
 from config import api_key
 
 app = Flask(__name__)
-@app.route("/")
+
+def check_city_existence(city):
+    location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
+    location_response = requests.get(location_url)
+    data_loc = location_response.json()
+    if data_loc:
+        return True
+    else:
+        return False
+
+@app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'Bang Kapi'
+    city = 'Londony'
     units = 'metric'
+    
+    if not check_city_existence(city):
+        message="City not found."
+        print("City not found.")
+        return render_template("error.html", message=message)
+    
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
     data_loc = location_response.json()
     lat = data_loc[0]["lat"]
     lon = data_loc[0]["lon"]
 
+
     weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/100/200.png?appid={api_key}"
+    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/100/200.png?appid={api_key}"   
 
     weather_response = requests.get(weather_url)
     air_response = requests.get(air_url)
@@ -37,11 +54,12 @@ def index_get():
         rain = False
     
     weather = {
-    'temperature': data["main"]["temp"],
-    'humidity': data["main"]["humidity"],
-    'feels_like' : data["main"]["feels_like"],
-    'aqi' : data_air["list"][0]["main"]["aqi"],
-    'icon': data['weather'][0]['icon'],
+        'city': city,
+        'temperature': data["main"]["temp"],
+        'humidity': data["main"]["humidity"],
+        'feels_like' : data["main"]["feels_like"],
+        'aqi' : data_air["list"][0]["main"]["aqi"],
+        'icon': data['weather'][0]['icon'],
     }
 
 
@@ -86,14 +104,6 @@ def index_get():
         print(message)
 
     return render_template("index.html", messages=messages, image_data=image_data, weather=weather)
-
-
-#check city name vaild 
-#@app.route('/', methods=['POST'])
-#def index_post():
-
-    #return 
-
 
 if __name__ == "__main__":
     app.run(debug=True)
