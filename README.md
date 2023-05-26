@@ -36,3 +36,4 @@ The key factors considered when assessing the weather status:
 - [what hot temperatures can do to your running and how to cope](https://www.runnersworld.com/uk/training/a775069/what-hot-temperatures-can-do-to-your-running-and-how-to-cope/#)
 - [OpenWeatherMap](https://openweathermap.org/api)
 - [Colorlib Error 404 V9](https://colorlib.com/wp/template/colorlib-error-404-9/)
+- [Error page img](https://pin.it/5l8X4Pi)
