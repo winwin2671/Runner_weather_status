@@ -14,14 +14,15 @@ def check_city_existence(city):
     else:
         return False
 
-@app.route("/")
+@app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'London'
+    city = 'Londony'
     units = 'metric'
     
     if not check_city_existence(city):
+        message="City not found."
         print("City not found.")
-        #return render_template("error.html", message="City not found.")
+        return render_template("error.html", message=message)
     
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
