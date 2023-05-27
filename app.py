@@ -16,7 +16,7 @@ def check_city_existence(city):
 
 @app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'London' #try type random word to see the erorr page
+    city = 'Bang Kapi' #try type random word to see the erorr page
     units = 'metric'
     
     if not check_city_existence(city):
@@ -33,8 +33,8 @@ def index_get():
 
     weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/100/200.png?appid={api_key}"   
-
+    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/10/20.png?appid={api_key}" #api error
+    
     weather_response = requests.get(weather_url)
     air_response = requests.get(air_url)
     map_response = requests.get(map_url)
@@ -44,7 +44,7 @@ def index_get():
     data_map = map_response.content
 
     image_data = data_map
-
+    
     print(json.dumps(data, indent=4))
     print(json.dumps(data_air, indent=4))
 
