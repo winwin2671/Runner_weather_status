@@ -16,7 +16,7 @@ def check_city_existence(city):
 
 @app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'phaya thai' #try type random word to see the erorr page
+    city = 'London' #try type random word to see the erorr page
     units = 'metric'
     
     if not check_city_existence(city):
@@ -80,14 +80,15 @@ def index_get():
     else:
         aqi_stat = 'Very Poor'
 
+    round_uvi = round(uvi)
 
-    if uvi == 0 or 1 or 2:
+    if round_uvi >= 0.0 and round_uvi <= 2.0:
         uvi_stat = 'Low'
-    elif uvi == 3 or 4 or 5:
+    elif round_uvi >= 3.0 and round_uvi <= 5.0:
         uvi_stat = 'Moderate'
-    elif uvi == 6 or 7:
+    elif round_uvi >= 6.0 and round_uvi <= 7.0:
         uvi_stat = 'High'
-    elif uvi == 8 or 9 or 10:
+    elif round_uvi >= 8.0 and round_uvi <= 9.0:
         uvi_stat = 'Very high'
     else:
         uvi_stat = 'Extreme'
@@ -98,7 +99,7 @@ def index_get():
         messages.append(f"Temperature may make it difficult to run: {temperature}°")
 
     if uvi >= 6 :
-        messages.append(f"UV index may not be suitable for running: {uvi}, {uvi_stat}")
+        messages.append(f"UV index may not be suitable for running: {round_uvi}, {uvi_stat}")
 
     if aqi >= 4:
         messages.append(f"Air quality may not be suitable for running. The AQI level is {aqi}, {aqi_stat}")
@@ -119,6 +120,7 @@ def index_get():
     for message in messages:
         print(message)
 
+    print(rain) 
     return render_template("index.html", messages=messages, image_data=image_data, weather=weather)
 
 if __name__ == "__main__":
