@@ -46,7 +46,8 @@ def index_get():
     
     print(json.dumps(data, indent=4))
     print(json.dumps(data_air, indent=4))
-
+    
+    #there is a bug here! 
     if "rain" in data:
         rain = True
     else:
