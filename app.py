@@ -16,7 +16,7 @@ def check_city_existence(city):
 
 @app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'London' #try type random word to see the erorr page
+    city = 'Hanston' #try type random word to see the erorr page
     units = 'metric'
     
     if not check_city_existence(city):
@@ -34,32 +34,35 @@ def index_get():
     weather_url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
     map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/10/20.png?appid={api_key}" #have to recheck url
+   
     weather_response = requests.get(weather_url)
     air_response = requests.get(air_url)
-    map_response = requests.get(map_url)
-
     data = weather_response.json()
     data_air = air_response.json()
-    data_map = map_response.content
-
-    image_data = data_map
+    
+    data_map = {'map_url': map_url}
+    
     
     print(json.dumps(data, indent=4))
     print(json.dumps(data_air, indent=4))
 
-    if "rain" in data:
+    main = data["current"]["weather"][0]['main']
+
+    if main == "Rain":
         rain = True
     else:
         rain = False
     
     weather = {
         'city': city,
+        'main': data["current"]["weather"][0]['main'],
         'temperature': data["current"]["temp"],
         'humidity': data["current"]["humidity"],
         'feels_like': data["current"]["feels_like"],
         'aqi': data_air["list"][0]["main"]["aqi"],
         'icon': data["current"]["weather"][0]["icon"],
-        'uvi': data["current"]["uvi"]
+        'uvi': data["current"]["uvi"],
+        'description': data["current"]["weather"][0]['description']
     }
 
 
@@ -68,7 +71,7 @@ def index_get():
     feels_like = data["current"]["feels_like"]
     aqi = data_air["list"][0]["main"]["aqi"]
     uvi = data["current"]["uvi"]
-
+    description = data["current"]["weather"][0]['description']
     if aqi == 1:
         aqi_stat = 'Good'
     elif aqi == 2:
@@ -120,8 +123,9 @@ def index_get():
     for message in messages:
         print(message)
 
-    print(rain) 
-    return render_template("index.html", messages=messages, image_data=image_data, weather=weather)
+    print("rain:", rain)
+    print("description:", description)
+    return render_template("index.html", messages=messages, data_map=data_map, weather=weather)
 
 if __name__ == "__main__":
     app.run(debug=True)
