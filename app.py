@@ -16,7 +16,7 @@ def check_city_existence(city):
 
 @app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'Hanston' #try type random word to see the erorr page
+    city = 'Bang Kapi' #try type random word to see the erorr page
     units = 'metric'
     
     if not check_city_existence(city):
@@ -125,7 +125,7 @@ def index_get():
 
     print("rain:", rain)
     print("description:", description)
-    return render_template("index.html", messages=messages, data_map=data_map, weather=weather)
+    return render_template("index.html", messages=messages, data_map=data_map, weather=weather, api_key=api_key)
 
 if __name__ == "__main__":
     app.run(debug=True)
