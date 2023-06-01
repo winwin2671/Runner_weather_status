@@ -1,9 +1,9 @@
 //Initializing the Application
-tt.setProductInfo(mapweatherdata, applicationVersion)
+tt.setProductInfo('mapweatherdata', '1.0.0')
 
 const tomTomMap = tt.map({
-  key: tomTomApiKey,
-  container: htmlDivId,
+  key: 'l5iRb3wJ9UOSekmviI5BVAdbxGbNfJo7',
+  container: 'graph',
 })
 
 //Searching for a Location
