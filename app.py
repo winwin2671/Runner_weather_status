@@ -1,6 +1,6 @@
 import json
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from config import api_key
 
 app = Flask(__name__)
@@ -126,6 +126,25 @@ def index_get():
     print("rain:", rain)
     print("description:", description)
     return render_template("index.html", messages=messages, data_map=data_map, weather=weather, api_key=api_key)
+
+
+@app.route("/api/city", methods=['GET'])
+def get_city():
+    city = 'Bang Kapi'
+    
+    location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
+    location_response = requests.get(location_url)
+    data_loc = location_response.json()
+    lat = data_loc[0]["lat"]
+    lon = data_loc[0]["lon"]
+
+    if not check_city_existence(city):
+        message="City not found."
+        print("City not found.")
+        return render_template("error.html", message=message)
+
+    return jsonify(city=city, lat=lat, lon=lon)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

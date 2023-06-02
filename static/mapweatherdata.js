@@ -1,26 +1,39 @@
+const applicationName = 'mapweatherdata'
+const applicationVersion = '1.0.0'
+const tomTomApiKey = 'l5iRb3wJ9UOSekmviI5BVAdbxGbNfJo7'
+const htmlDivId = 'graph'
+
 //Initializing the Application
-tt.setProductInfo('mapweatherdata', '1.0.0')
+tt.setProductInfo(applicationName, applicationVersion)
 
 const tomTomMap = tt.map({
-  key: 'l5iRb3wJ9UOSekmviI5BVAdbxGbNfJo7',
-  container: 'graph',
+  key: tomTomApiKey,
+  container: htmlDivId,
 })
 
 //Searching for a Location
-tt.services
-  .fuzzySearch({
-    key: tomTomApikey,
-    query: queryText,
-  })
-  .go()
-  .then(centerAndZoom)
-  .catch(function (error) {
-    alert('Could not find location (' + queryText + '). ' + error.message)
+fetch('/api/city')
+  .then((response) => response.json())
+  .then((data) => {
+    const queryText = data.city
+    console.log('Query Text:', queryText)
+
+    // Perform the fuzzy search with the retrieved query text
+    tt.services
+      .fuzzySearch({
+        key: tomTomApiKey,
+        query: queryText,
+      })
+      .go()
+      .then(centerAndZoom)
+      .catch((error) => {
+        alert('Could not find location (' + queryText + '). ' + error.message)
+      })
   })
 
 function centerAndZoom(response) {
   tomTomMap.flyTo({
     center: response.results[0].position,
-    zoom: zoomLevel,
+    zoom: 0,
   })
 }

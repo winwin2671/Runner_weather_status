@@ -12,7 +12,6 @@
     />
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps-web.min.js"></script>
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/services/services-web.min.js"></script>
-    <script src="./static/mapweatherdata.js"></script>
     <title>Weather App</title>
   </head>
   <body>
@@ -72,12 +71,10 @@
             <li>{{ message }}</li>
             {% endfor %}
           </div>
-          <div class="graph" id="graph">
+          <div class="graph">
             <!-- float bottom -->
             <p>input graph here</p>
-            <img
-              src="https://tile.openweathermap.org/map/precipitation_new/0/0/0.png?appid={{api_key}}"
-            />
+            <div id="graph"></div>
           </div>
         </div>
         <div class="weather-info">
@@ -110,5 +107,6 @@
       </div>
     </div>
     {% endblock %}
+    <script src="./static/mapweatherdata.js"></script>
   </body>
 </html>
