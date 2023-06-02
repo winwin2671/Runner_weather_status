@@ -1,7 +1,7 @@
 import json
 import requests
 from flask import Flask, render_template, request, jsonify
-from config import api_key
+from config import api_key, TOMTOM_API_KEY
 
 app = Flask(__name__)
 
@@ -125,7 +125,10 @@ def index_get():
 
     print("rain:", rain)
     print("description:", description)
-    return render_template("index.html", messages=messages, data_map=data_map, weather=weather, api_key=api_key)
+
+    tomTomApiKey=TOMTOM_API_KEY
+
+    return render_template("index.html", messages=messages, data_map=data_map, weather=weather, api_key=api_key, tomTomApiKey=tomTomApiKey)
 
 
 @app.route("/api/city", methods=['GET'])

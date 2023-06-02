@@ -1,6 +1,6 @@
 const applicationName = 'mapweatherdata'
 const applicationVersion = '1.0.0'
-const tomTomApiKey = 'l5iRb3wJ9UOSekmviI5BVAdbxGbNfJo7'
+const tomTomApiKey = document.currentScript.getAttribute('tomTomApiKey')
 const htmlDivId = 'graph'
 
 //Initializing the Application
