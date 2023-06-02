@@ -16,7 +16,7 @@ def check_city_existence(city):
 
 @app.route("/" ,methods = ['POST', 'GET'])
 def index_get():
-    city = 'Bang Kapi' #try type random word to see the erorr page
+    city = request.form.get('city')
     units = 'metric'
     
     if not check_city_existence(city):
@@ -129,21 +129,14 @@ def index_get():
 
 @app.route("/api/city", methods=['GET'])
 def get_city():
-    city = 'Bang Kapi'
+    city = 'Bang Kapi' # only this line left to get city 
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
     data_loc = location_response.json()
     lat = data_loc[0]["lat"]
     lon = data_loc[0]["lon"]
 
-    if not check_city_existence(city):
-        message="City not found."
-        print("City not found.")
-        return render_template("error.html", message=message)
-    
     tomTomApiKey=TOMTOM_API_KEY
-
-
 
     return jsonify(city=city, lat=lat, lon=lon, tomTomApiKey=tomTomApiKey, api_key=api_key)
 
