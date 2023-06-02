@@ -8,10 +8,10 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps.css"
+      href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.4.0/maps/maps.css"
     />
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps-web.min.js"></script>
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/services/services-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.4.0/maps/maps-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.4.0/services/services-web.min.js"></script>
     <title>Weather App</title>
   </head>
   <body>
@@ -74,7 +74,7 @@
           <div class="graph">
             <!-- float bottom -->
             <p>input graph here</p>
-            <div id="graph"></div>
+            <div style="width: 50vh; height: 40vh;" id="graph"></div>
           </div>
         </div>
         <div class="weather-info">
@@ -107,9 +107,6 @@
       </div>
     </div>
     {% endblock %}
-    <script
-      src="./static/mapweatherdata.js"
-      tomTomApiKey="{{ tomTomApiKey }}"
-    ></script>
+    <script src="./static/mapweatherdata.js"></script>
   </body>
 </html>

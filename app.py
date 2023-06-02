@@ -33,15 +33,11 @@ def index_get():
 
     weather_url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={api_key}&units={units}"
     air_url = f"http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={api_key}"
-    map_url = f"https://tile.openweathermap.org/map/precipitation_new/10/10/20.png?appid={api_key}" #have to recheck url
-   
+
     weather_response = requests.get(weather_url)
     air_response = requests.get(air_url)
     data = weather_response.json()
     data_air = air_response.json()
-    
-    data_map = {'map_url': map_url}
-    
     
     print(json.dumps(data, indent=4))
     print(json.dumps(data_air, indent=4))
@@ -128,13 +124,12 @@ def index_get():
 
     tomTomApiKey=TOMTOM_API_KEY
 
-    return render_template("index.html", messages=messages, data_map=data_map, weather=weather, api_key=api_key, tomTomApiKey=tomTomApiKey)
+    return render_template("index.html", messages=messages, weather=weather, api_key=api_key, tomTomApiKey=tomTomApiKey)
 
 
 @app.route("/api/city", methods=['GET'])
 def get_city():
     city = 'Bang Kapi'
-    
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
     data_loc = location_response.json()
@@ -145,8 +140,12 @@ def get_city():
         message="City not found."
         print("City not found.")
         return render_template("error.html", message=message)
+    
+    tomTomApiKey=TOMTOM_API_KEY
 
-    return jsonify(city=city, lat=lat, lon=lon)
+
+
+    return jsonify(city=city, lat=lat, lon=lon, tomTomApiKey=tomTomApiKey, api_key=api_key)
 
 
 if __name__ == "__main__":
