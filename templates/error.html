@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error</title>
+  </head>
+  <style>
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #34495e;
+    }
+
+    #notfound {
+      position: relative;
+      height: 100vh;
+    }
+
+    #notfound .notfound {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .notfound {
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    img {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      margin: 0px auto 50px;
+      transform: translate(-30%, -50.9%);
+      padding-left: 20px;
+    }
+    .notfound .notfound-404 {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0px auto 50px;
+    }
+
+    .notfound .notfound-404 h1 {
+      font-family: 'Cabin', sans-serif;
+      color: #7ac9f1;
+      font-weight: 700;
+      margin: 0;
+      font-size: 90px;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .notfound h2 {
+      font-family: 'Cabin', sans-serif;
+      font-size: 33px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 7px;
+      color: #fff;
+    }
+
+    .notfound p {
+      font-family: 'Cabin', sans-serif;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 400;
+    }
+
+    .notfound a {
+      font-family: 'Cabin', sans-serif;
+      display: inline-block;
+      padding: 10px 25px;
+      background-color: #8f8f8f;
+      border: none;
+      border-radius: 40px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      -webkit-transition: 0.2s all;
+      transition: 0.2s all;
+    }
+
+    .notfound a:hover {
+      background-color: #fff;
+    }
+  </style>
+
+  <body>
+    <div id="notfound">
+      <div class="notfound">
+        <div class="notfound-404">
+          <img
+            src="https://i.pinimg.com/564x/a2/80/11/a2801105cb5900bb36ea0b5002438b31.jpg"
+          />
+
+          <h1>400</h1>
+        </div>
+        <h2>{{ message }}</h2>
+        <p>
+          The location you are looking for might not exist or misspelled.
+        </p>
+        <a href="#">main page</a>
+      </div>
+    </div>
+  </body>
+</html>
