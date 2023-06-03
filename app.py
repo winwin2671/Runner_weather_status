@@ -143,10 +143,6 @@ def get_city():
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
     data_loc = location_response.json()
-
-    if not data_loc:
-        return jsonify(error='City not found')
-    
     lat = data_loc[0]["lat"]
     lon = data_loc[0]["lon"]
 

@@ -70,45 +70,35 @@
         <div class="running-info">
           <!-- will float right -->
           <div class="should-run">
+            <div class="should">
+              <h1>Should you run?</h1>
+              <!-- should run messages -->
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+  
+            </div>
             <!-- float top -->
-            <h1>Should you run?</h1>
-            <!-- should run messages -->
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-          </div>
-          <div class="graph">
-            <!-- float bottom -->
-            <p>input graph here</p>
-            <div style="width: 50vh; height: 40vh;" id="graph"></div>
+            <div class="map">
+              <!-- float bottom -->
+              <div style="width: 50vh; height: 40vh;" id="graph"></div>
+            </div>
+  
           </div>
         </div>
         <div class="weather-info">
           <!--float left -->
           <div class="air">
             <!-- float top -->
-            <p>Icon here</p>
-
             <!-- weather icon -->
             <img
               src="http://openweathermap.org/img/wn/{{weather.icon}}@4x.png"
               alt="icon"
             />
-
             <p>temperature</p>
             <p>feels like</p>
-          </div>
-          <div class="pollen-UV">
-            <!-- float botoom -->
-            <div class="pollen">
-              <!-- float left -->
-              <p>Pollen count</p>
-            </div>
-            <div class="UV">
-              <!-- float right -->
-              <p>UV</p>
-            </div>
-          </div>
+            <p>Air quality</p>
+          </div>      
         </div>
       </div>
     </div>
