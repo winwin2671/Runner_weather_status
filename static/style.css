@@ -38,3 +38,34 @@ div
   float: right;
 }
 
+.running-info{
+  float: right;
+}
+
+.should-run{
+  float: top;
+}
+
+.graph{
+  float: bottom;
+}
+
+.weather-info{
+  float: left;
+}
+
+.air{
+  float: top;
+}
+
+.pollen-UV{
+  float: bottom;
+}
+
+.pollen{
+  float: left
+}
+
+.UV{
+  float: right
+}
