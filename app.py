@@ -19,6 +19,17 @@ def index_get():
     city = request.form.get('city')
     units = 'metric'
     
+    #to handle render error.html when run, created a default city 
+    if not city:
+        city = 'London'
+    
+    #if the city is not enter render error.html
+    if not city:
+        message = "Please enter a city."
+        print("No city entered.")
+        return render_template("error.html", message=message)
+
+
     if not check_city_existence(city):
         message="City not found."
         print("City not found.")
@@ -126,13 +137,16 @@ def index_get():
 
     return render_template("index.html", messages=messages, weather=weather, api_key=api_key, tomTomApiKey=tomTomApiKey)
 
-
 @app.route("/api/city", methods=['GET'])
 def get_city():
-    city = 'Bang Kapi' # only this line left to get city 
+    city = request.args.get('city','London')
     location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
     location_response = requests.get(location_url)
     data_loc = location_response.json()
+
+    if not data_loc:
+        return jsonify(error='City not found')
+    
     lat = data_loc[0]["lat"]
     lon = data_loc[0]["lon"]
 
