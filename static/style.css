@@ -28,44 +28,45 @@ div
   display: block;
 }
 
-.place
-{
-  float: left;
-}
-
-.settings
-{
-  float: right;
-}
-
 .running-info{
   float: right;
+  position: absolute;
+  left: 60%;
 }
 
 .should-run{
-  float: top;
+  text-align: center;
 }
 
-.graph{
-  float: bottom;
+.should{
+  background-color: rgb(133, 133, 133);
+  padding: 5% 26% 5% 26%;
+  border-radius: 50px;
+
+
 }
+
 
 .weather-info{
   float: left;
+  left: 60%;
+  position: relative;
+}
+
+.map{
+  margin-top: 5%;
+  float: bottom;
+  background-color:rgb(133, 133, 133) ;
+  padding: 5% 5% 5% 5%;
+  border-radius: 50px;
+}
+
+h1,p,li{
+  color: white;
+  position: relative;
 }
 
 .air{
   float: top;
 }
 
-.pollen-UV{
-  float: bottom;
-}
-
-.pollen{
-  float: left
-}
-
-.UV{
-  float: right
-}
