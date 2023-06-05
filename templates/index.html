@@ -76,14 +76,12 @@
               {% for message in messages %}
               <li>{{ message }}</li>
               {% endfor %}
-  
             </div>
             <!-- float top -->
             <div class="map">
               <!-- float bottom -->
               <div style="width: 50vh; height: 40vh;" id="graph"></div>
             </div>
-  
           </div>
         </div>
         <div class="weather-info">
@@ -98,11 +96,15 @@
             <p>temperature</p>
             <p>feels like</p>
             <p>Air quality</p>
-          </div>      
+          </div>
         </div>
       </div>
     </div>
     {% endblock %}
-    <script src="./static/mapweatherdata.js"></script>
+    <script
+      src="./static/mapweatherdata.js"
+      lat="{{lat}}"
+      lon="{{lon}}"
+    ></script>
   </body>
 </html>
