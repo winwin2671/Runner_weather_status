@@ -1,2 +1,2 @@
-api_key = '147aaec129367897e4f74f9ed2500438'
+api_key = '2d371de01d2770e04d531ec5a184493d'
 TOMTOM_API_KEY='l5iRb3wJ9UOSekmviI5BVAdbxGbNfJo7'
