@@ -1,8 +1,8 @@
 fetch('/api/city')
   .then((response) => response.json())
   .then((data) => {
-    const lat = data.lat
-    const lon = data.lon
+    const lat = document.querySelector('script[lat]').getAttribute('lat')
+    const lon = document.querySelector('script[lon]').getAttribute('lon')
 
     const tomTomApiKey = data.tomTomApiKey
     const api_key = data.api_key

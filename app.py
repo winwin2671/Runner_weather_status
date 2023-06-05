@@ -135,20 +135,14 @@ def index_get():
 
     tomTomApiKey=TOMTOM_API_KEY
 
-    return render_template("index.html", messages=messages, weather=weather, api_key=api_key, tomTomApiKey=tomTomApiKey)
+    return render_template("index.html", messages=messages, weather=weather, lat=lat, lon=lon, api_key=api_key, tomTomApiKey=tomTomApiKey)
 
 @app.route("/api/city", methods=['GET'])
 def get_city():
-    city = request.args.get('city','London')
-    location_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={api_key}"
-    location_response = requests.get(location_url)
-    data_loc = location_response.json()
-    lat = data_loc[0]["lat"]
-    lon = data_loc[0]["lon"]
 
     tomTomApiKey=TOMTOM_API_KEY
 
-    return jsonify(city=city, lat=lat, lon=lon, tomTomApiKey=tomTomApiKey, api_key=api_key)
+    return jsonify(tomTomApiKey=tomTomApiKey, api_key=api_key)
 
 
 if __name__ == "__main__":
