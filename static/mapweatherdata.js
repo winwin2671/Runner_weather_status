@@ -11,7 +11,9 @@ fetch('/api/city')
     const htmlDivId = 'graph'
     const openWeatherMapAttribution = 'Weather data provided by OpenWeatherMap'
 
-    //Initializing the Application
+    var throttleTimer // Define the throttleTimer variable here
+
+    // Initializing the Application
     tt.setProductInfo(applicationName, applicationVersion)
 
     const tomTomMap = tt.map({
@@ -19,7 +21,7 @@ fetch('/api/city')
       container: htmlDivId,
     })
 
-    //Searching for a Location
+    // Searching for a Location
     var city = { lng: lon, lat: lat }
 
     var map = tt.map({
@@ -29,7 +31,7 @@ fetch('/api/city')
       zoom: 13,
     })
 
-    // adding layer
+    // Adding layer
     var rainSource = {
       type: 'raster',
       tiles: [
@@ -65,7 +67,16 @@ fetch('/api/city')
       throttleAPIRequests()
     })
 
+    var requestCount = 0 // counter for API requests made
+    var requestTimestamps = [] // array to store timestamps of the requests
+
     function throttleAPIRequests() {
+      // Check if the rate limit has been reached
+      if (requestCount >= 60) {
+        console.log('Rate limit requests reached')
+        return
+      }
+
       // Clear the previous timer, if any
       clearTimeout(throttleTimer)
 
@@ -74,6 +85,10 @@ fetch('/api/city')
     }
 
     function makeAPIRequest() {
+      // Increment the request count and add the current timestamp
+      requestCount++
+      requestTimestamps.push(Date.now())
+
       // Fetch the tile from the API
       fetch(rainSource.tiles[0] + api_key)
         .then((response) => {
@@ -106,6 +121,17 @@ fetch('/api/city')
         })
         .catch((error) => {
           console.log('Error fetching tile:', error)
+        })
+        .finally(() => {
+          // Remove expired timestamps from the requestTimestamps array
+          const expireTime = Date.now() - 60000
+          while (
+            requestTimestamps.length > 0 &&
+            requestTimestamps[0] < expireTime
+          ) {
+            requestTimestamps.shift()
+            requestCount--
+          }
         })
     }
   })
