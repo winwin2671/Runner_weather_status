@@ -135,7 +135,7 @@ def index_get():
 
     tomTomApiKey=TOMTOM_API_KEY
 
-    return render_template("index.html", messages=messages, weather=weather, lat=lat, lon=lon, api_key=api_key, tomTomApiKey=tomTomApiKey)
+    return render_template("index.html", messages=messages, weather=weather, lat=lat, lon=lon, api_key=api_key, tomTomApiKey=tomTomApiKey, aqi_stat=aqi_stat,uvi_stat=uvi_stat )
 
 @app.route("/api/city", methods=['GET'])
 def get_city():
