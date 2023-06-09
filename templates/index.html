@@ -92,10 +92,24 @@
             <img
               src="http://openweathermap.org/img/wn/{{weather.icon}}@4x.png"
               alt="icon"
+              style="width: 27vh; height: auto;"
             />
-            <p>temperature</p>
-            <p>feels like</p>
-            <p>Air quality</p>
+            <h1>{{weather.city}}</h1>
+            <p>
+              Temperature: {{weather.temperature}}°C, {{weather.description}}
+            </p>
+            <p>Humidity: {{weather.humidity}}</p>
+            <p>feels like: {{weather.feels_like}}°C</p>
+          </div>
+          <div class="aqi_uv" style="padding: 2rem;">
+            <div class="aqi">
+              <p>AQI Level</p>
+              <p>{{weather.aqi}}, {{aqi_stat}}</p>
+            </div>
+            <div class="uv">
+              <p>UV Index</p>
+              <p>{{weather.uvi}}, {{uvi_stat}}</p>
+            </div>
           </div>
         </div>
       </div>
