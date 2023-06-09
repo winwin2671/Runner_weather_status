@@ -1,16 +1,13 @@
-body
-{
+body {
   background-color: lightgrey;
   margin: 0;
 }
 
-div
-{
+div {
   display: inline-block;
 }
 
-.container
-{
+.container {
   position: absolute;
   background-color: rgb(92, 91, 91);
   border-radius: 25px;
@@ -19,54 +16,51 @@ div
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
 }
 
-.top-nav
-{
+.top-nav {
   padding: 2%;
   display: block;
 }
 
-.running-info{
+.running-info {
   float: right;
   position: absolute;
   left: 60%;
 }
 
-.should-run{
+.should-run {
   text-align: center;
+  transform: translate(0, -14.5%);
 }
 
-.should{
+.should {
   background-color: rgb(133, 133, 133);
   padding: 5% 26% 5% 26%;
   border-radius: 50px;
-
-
 }
 
-
-.weather-info{
+.weather-info {
   float: left;
   left: 60%;
   position: relative;
 }
 
-.map{
+.map {
   margin-top: 5%;
   float: bottom;
-  background-color:rgb(133, 133, 133) ;
+  background-color: rgb(133, 133, 133);
   padding: 5% 5% 5% 5%;
   border-radius: 50px;
 }
 
-h1,p,li{
+h1,
+p,
+li {
   color: white;
   position: relative;
 }
 
-.air{
+.air {
   float: top;
 }
-
