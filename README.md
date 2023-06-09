@@ -33,7 +33,7 @@ The key factors considered when assessing the weather status:
  instuction todo
   
 # Future Features:
-  - Get user's location automatically by using Geolocation API. Since, London is set as the default location in the curent version. 
+  - Get user's location automatically by using Geolocation API. Since, London was set as the default location in the curent version. 
   
 # Acknowledgements:
 - [Impact of Weather on Marathon-Running Performance](https://journals.lww.com/acsm-msse/Fulltext/2007/03000/Impact_of_Weather_on_Marathon_Running_Performance.12.aspx)
