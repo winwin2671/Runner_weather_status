@@ -17,21 +17,29 @@ The key factors considered when assessing the weather status:
   
   ## Tech used:
   - Python (Flask)
+  - JavaScript 
   - HTML
   - CSS
   - Openweathermap API
+  - TomTom API
   
 # How to Install and Run the Project:
- todo 
- will do it by adding requirements.txt file
+ install the requirements with the following command:
+ 
+ ```
+  pip3 install -r requirements.txt
+ ```
+ ## API KEY
+ instuction todo
   
 # Future Features:
-  - Get user's location automatically by using Geolocation API 
+  - Get user's location automatically by using Geolocation API. Since, London is set as the default location in the curent version. 
   
 # Acknowledgements:
 - [Impact of Weather on Marathon-Running Performance](https://journals.lww.com/acsm-msse/Fulltext/2007/03000/Impact_of_Weather_on_Marathon_Running_Performance.12.aspx)
 - [Here's How Weather Conditions Affect Your Running Speed](https://www.outsideonline.com/health/training-performance/weather-running-performance-research/)
 - [what hot temperatures can do to your running and how to cope](https://www.runnersworld.com/uk/training/a775069/what-hot-temperatures-can-do-to-your-running-and-how-to-cope/#)
 - [OpenWeatherMap](https://openweathermap.org/api)
+- [TomTom](https://developer.tomtom.com/)
 - [Colorlib Error 404 V9](https://colorlib.com/wp/template/colorlib-error-404-9/)
 - [Error page img](https://pin.it/5l8X4Pi)
