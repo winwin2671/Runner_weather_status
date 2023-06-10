@@ -1,5 +1,5 @@
 # Runner_weather_status/CS50x Final project
-#### Video Demo:  URL HERE
+#### Video Demo: [URL HERE](https://youtu.be/hpapp_bKx-o)
 # Description:
 This project is part of Harvard CS50's Introduction to Computer Science final project. Runner_weather_status is a dedicated application designed for runners, providing comprehensive information on weather conditions and air pollutant levels then suggests users on whether it is suitable to run outside based on their entered location with the use of Openweathermap API.
   
