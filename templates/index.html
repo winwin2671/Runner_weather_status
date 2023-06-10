@@ -71,7 +71,7 @@
           <!-- will float right -->
           <div class="should-run">
             <div class="should">
-              <h1>Should you run?</h1>
+              <h1 class="T_should">Should you run?</h1>
               <!-- should run messages -->
               {% for message in messages %}
               <li>{{ message }}</li>
@@ -93,10 +93,14 @@
               src="http://openweathermap.org/img/wn/{{weather.icon}}@4x.png"
               alt="icon"
               style="width: 27vh; height: auto;"
+              class="icon"
             />
             <h1>{{weather.city}}</h1>
             <p>
-              Temperature: {{weather.temperature}}°C, {{weather.description}}
+              Temperature: {{weather.temperature}}°C,
+            </p>
+            <p>
+              {{weather.description}}
             </p>
             <p>Humidity: {{weather.humidity}}</p>
             <p>feels like: {{weather.feels_like}}°C</p>
