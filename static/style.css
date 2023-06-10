@@ -11,8 +11,8 @@ div {
   position: absolute;
   background-color: rgb(92, 91, 91);
   border-radius: 25px;
-  height: 75vh;
-  width: 75vw;
+  height: 88vh;
+  width: 85vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -71,4 +71,54 @@ li {
 
 .air {
   float: top;
+}
+
+/* media query */
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .map {
+    display: none;
+  }
+}
+
+/* iPads, Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .T_should {
+    font-size: 16px;
+  }
+  li {
+    font-size: 14px;
+  }
+  .should {
+    padding: 5% 19% 5% 19%;
+  }
+  .weather-info {
+    transform: translate(-50%, -7.5%);
+  }
+  .icon {
+    width: none;
+    height: none;
+  }
+}
+
+/* laptops */
+@media (min-width: 1025px) and (max-width: 1700px) {
+  .T_should {
+    font-size: 16px;
+  }
+  li {
+    font-size: 14px;
+  }
+  .should {
+    padding: 5% 19% 5% 19%;
+  }
+
+  .weather-info {
+    transform: translate(-50%, -7.5%);
+  }
+  .icon {
+    width: none;
+    height: none;
+  }
 }
