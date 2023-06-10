@@ -1,8 +1,8 @@
 # Runner_weather_status/CS50x Final project
-#### Video Demo:  URL HERE
+#### Video Demo: [URL HERE](https://youtu.be/hpapp_bKx-o)
 # Description:
-This project is part of Harvard CS50's Introduction to Computer Science final project. Runner_weather_status is a dedicated application designed for runners, providing comprehensive information on weather conditions and air pollutant levels then suggests users on whether it is suitable to run outside based on their entered location with the use of Openweathermap API.
-  
+This project is part of Harvard CS50's Introduction to Computer Science final project. Runner_weather_status is a dedicated application designed for runners, providing comprehensive information on weather conditions and air pollutant levels then suggesting to users whether it is suitable to run outside based on their entered location with the use of OpenWeatherMap API.
+
 The key factors considered when assessing the weather status:
   - Temperature
   - humidity
@@ -20,7 +20,7 @@ The key factors considered when assessing the weather status:
   - JavaScript 
   - HTML
   - CSS
-  - Openweathermap API
+  - OpenWeatherMap API
   - TomTom API
   
 # How to Install and Run the Project:
@@ -30,10 +30,10 @@ The key factors considered when assessing the weather status:
   pip3 install -r requirements.txt
  ```
  ## API KEY
- instuction todo
+ You have to register your own api keys and update in to config.py
   
 # Future Features:
-  - Get user's location automatically by using Geolocation API. Since, London was set as the default location in the curent version. 
+  - Get the user's location automatically by using Geolocation API. Since London was set as the default location in the current version.
   
 # Acknowledgements:
 - [Impact of Weather on Marathon-Running Performance](https://journals.lww.com/acsm-msse/Fulltext/2007/03000/Impact_of_Weather_on_Marathon_Running_Performance.12.aspx)
