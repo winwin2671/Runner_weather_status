@@ -30,7 +30,7 @@ The key factors considered when assessing the weather status:
   pip3 install -r requirements.txt
  ```
  ## API KEY
- You have to register your own api keys and update in to config.py
+ You have to register your own api keys and update into config.py
   
 # Future Features:
   - Get the user's location automatically by using Geolocation API. Since London was set as the default location in the current version.
